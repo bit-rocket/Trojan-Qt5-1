@@ -37,8 +37,8 @@ win32 {
 }
 
 mac {
-    isEmpty(PROTOC):PROTOC = /usr/local/bin/protoc
-    isEmpty(PROTOC_GRPC):PROTOC_GRPC = /usr/local/bin/grpc_cpp_plugin
+    isEmpty(PROTOC):PROTOC = /opt/homebrew/bin/protoc
+    isEmpty(PROTOC_GRPC):PROTOC_GRPC = /opt/homebrew/bin/grpc_cpp_plugin
 }
 
 unix:!mac {

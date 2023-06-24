@@ -1,5 +1,5 @@
 #include "trojanthread.h"
-#include "Trojan-Qt5-Core.h"
+#include "trojan-qt5-core.h"
 
 TrojanThread::TrojanThread(QString filePath) : filePath(filePath)
 {}

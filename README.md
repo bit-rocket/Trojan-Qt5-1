@@ -80,3 +80,7 @@ This project is based on:
 - [Qv2ray](https://github.com/qv2ray/qv2ray)
 
 Trojan-Qt5's icon is owned by `mielink` and `erdongchan`, any unanthorized usage will be blamed.
+
+## TODOs
+- [ ] fix mac docker click event
+- [ ] fix crash on trojan exit(snell proxy exit)

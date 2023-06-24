@@ -15,7 +15,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Trojan-Qt5</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.thewanderingcoel.trojan-qt5</string>
+	<string>cert_for_trojan_qt5</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -40,7 +40,7 @@
 			<key>CFBundleURLIconFile</key>
 			<string>Icon</string>
 			<key>CFBundleURLName</key>
-			<string>com.thewanderingcoel.trojan-qt5</string>
+			<string>cert_for_trojan_qt5</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>trojan-qt5</string>

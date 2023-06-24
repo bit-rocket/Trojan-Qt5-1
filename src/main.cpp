@@ -18,7 +18,7 @@
 #include "tuntaphelper.h"
 
 #if defined (Q_OS_MAC)
-#include "letsmove/PFMoveApplication.h"
+#include "LetsMove/PFMoveApplication.h"
 #endif
 
 #if defined (Q_OS_WIN)
@@ -77,26 +77,30 @@ void setupApplication(QApplication &a)
  * @ref https://stackoverflow.com/questions/15143369/qt-on-os-x-how-to-detect-clicking-the-app-dock-icon
  */
 void setupDockClickHandler() {
-    Class cls = objc_getClass("NSApplication");
-    objc_object *appInst = (objc_object*)objc_msgSend((id)cls, sel_registerName("sharedApplication"));
+    // TODO https://github.com/dogecoin/dogecoin/pull/2333/files
+    // https://blog.csdn.net/woashizhangsi/article/details/109018947
+    // https://github.com/QuanGe/Xcode-About
+    Logger::warning("[Dock] mock and skip dock click handler");
+    // Class cls = objc_getClass("NSApplication");
+    // objc_object *appInst = (objc_object*)objc_msgSend((id)cls, sel_registerName("sharedApplication"));
 
-    if(appInst != NULL) {
-        objc_object* delegate = (objc_object*)objc_msgSend((id)appInst, sel_registerName("delegate"));
-        Class delClass = (Class)objc_msgSend((id)delegate,  sel_registerName("class"));
-        SEL shouldHandle = sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:");
-        if (class_getInstanceMethod(delClass, shouldHandle)) {
-            if (class_replaceMethod(delClass, shouldHandle, (IMP)dockClickHandler, "B@:"))
-                return;
-            else
-                Logger::warning("[Dock] Failed to replace method for dock click handler");
-        }
-        else {
-            if (class_addMethod(delClass, shouldHandle, (IMP)dockClickHandler,"B@:"))
-                return;
-            else
-                Logger::warning("[Dock] Failed to register dock click handler");
-        }
-    }
+    // if(appInst != NULL) {
+    //     objc_object* delegate = (objc_object*)objc_msgSend((id)appInst, sel_registerName("delegate"));
+    //     Class delClass = (Class)objc_msgSend((id)delegate,  sel_registerName("class"));
+    //     SEL shouldHandle = sel_registerName("applicationShouldHandleReopen:hasVisibleWindows:");
+    //     if (class_getInstanceMethod(delClass, shouldHandle)) {
+    //         if (class_replaceMethod(delClass, shouldHandle, (IMP)dockClickHandler, "B@:"))
+    //             return;
+    //         else
+    //             Logger::warning("[Dock] Failed to replace method for dock click handler");
+    //     }
+    //     else {
+    //         if (class_addMethod(delClass, shouldHandle, (IMP)dockClickHandler,"B@:"))
+    //             return;
+    //         else
+    //             Logger::warning("[Dock] Failed to register dock click handler");
+    //     }
+    // }
 }
 
 bool dockClickHandler(id self,SEL _cmd,...)

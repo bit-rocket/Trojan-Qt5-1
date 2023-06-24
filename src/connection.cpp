@@ -8,7 +8,7 @@
 #include "ssgoapi.h"
 #include "v2rayapi.h"
 #include "trojangoapi.h"
-#include "Trojan-Qt5-Core.h"
+#include "trojan-qt5-core.h"
 #include "SSRThread.hpp"
 #include "utils.h"
 #include "logger.h"
@@ -195,7 +195,7 @@ void Connection::start()
         ssr->connect(ssr.get(), &SSRThread::OnDataReady, this, &Connection::onNewBytesTransmitted);
     } else if (profile.type == "vmess") {
         conf->generateV2rayJson(profile);
-        setAssetPath(conf->getCoreSettings().geoPath.toUtf8().data());
+        // setAssetPath(conf->getCoreSettings().geoPath.toUtf8().data());
         testV2rayGo_return v2rayStatus = testV2rayGo(file.toStdString().data());
         if (!v2rayStatus.r0) {
             QMessageBox::critical(NULL, tr("Failed to start V2Ray"), v2rayStatus.r1);

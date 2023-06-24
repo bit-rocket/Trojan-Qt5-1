@@ -31,9 +31,12 @@ TARGET = trojan-qt5
 # Use OpenSource Version of Qt5
 QT_EDITION = OpenSource
 
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 12.0
+
 CONFIG += c++17
 CONFIG += sdk_no_version_check
-CONFIG += link_pkgconfig
+#CONFIG += link_pkgconfig
+CONFIG+=link_pkgconfig
 # Sanitizer
 #CONFIG += sanitizer sanitize_address
 
@@ -44,7 +47,7 @@ CONFIG += link_pkgconfig
 #DEFINES += QT_DEPRECATED_WARNINGS
 
 # Define App Version
-DEFINES += "APP_VERSION=\"\\\"1.4.0\\\"\""
+DEFINES += "APP_VERSION=\"\\\"1.4.1\\\"\""
 
 # Set Build Info String
 _TROJAN_QT5_BUILD_INFO_STR_=$$getenv(_TROJAN_QT5_BUILD_INFO_)
@@ -66,6 +69,7 @@ DEFINES += QT_QTCOLORPICKER_EXPORT
 
 # 3rdParty Headers
 INCLUDEPATH += $$PWD/src/plog/include
+INCLUDEPATH += $$PWD/3rd/qhttpserver/src/
 
 # QNtp
 include($$PWD/src/qntp/qntp.pri)
@@ -130,12 +134,26 @@ mac {
         src/letsmove/PFMoveApplication.m \
         src/theme/themehelper.mm \
         src/systemproxy/mac.mm
-    PKG_CONFIG = /usr/local/bin/pkg-config
-    INCLUDEPATH += /usr/local/opt/zlib/include
-    INCLUDEPATH += /usr/local/opt/openssl@1.1/include
-    LIBS += -L/usr/local/opt/zlib/lib -lz
-    LIBS += -L/usr/local/opt/openssl@1.1/lib -lssl -lcrypto
-    LIBS += -L/usr/local/opt/grpc/lib -lupb -laddress_sorting
+#    PKG_CONFIG = /usr/local/bin/pkg-config
+#    INCLUDEPATH += /usr/local/opt/zlib/include
+#    INCLUDEPATH += /usr/local/opt/openssl@1.1/include
+#    LIBS += -L/usr/local/opt/zlib/lib -lz
+#    LIBS += -L/usr/local/opt/zlib/lib -lz
+    PKG_CONFIG = /opt/homebrew/bin/pkg-config
+#    PKG_CONFIG_PATH = /opt/homebrew/bin/pkg-config
+    PKG_CONFIG_PATH = /usr/local/lib/pkgconfig
+    INCLUDEPATH += /opt/homebrew/Cellar/zlib/1.2.13/include
+    INCLUDEPATH += /opt/homebrew/Cellar/openssl@1.1/1.1.1q/include
+    INCLUDEPATH += /opt/homebrew/Cellar/qt@5/5.15.9/lib/Sparkle.framework/Headers
+    LIBS += -L/opt/homebrew/Cellar/zlib/1.2.13/lib -lz
+    LIBS += -L/opt/homebrew/Cellar/zbar/0.23.90_4/lib/ -lzbar -lzbar.0
+#    LIBS += -L/usr/local/opt/openssl@1.1/lib -lssl -lcrypto
+    LIBS += -L/opt/homebrew/Cellar/openssl@1.1/1.1.1u/lib/ -lssl -lcrypto
+#    LIBS += -L/usr/local/opt/grpc/lib -lupb -laddress_sorting
+#    LIBS += -L/opt/homebrew/Cellar/grpc/1.47.1/lib -lupb -laddress_sorting
+    LIBS += -L/opt/homebrew/Cellar/grpc/1.55.1_1/lib -lupb -laddress_sorting
+#    LIBS += -L/opt/homebrew/Cellar/grpc/1.55.1/lib -lgrpc -laddress_sorting
+#    LIBS += -L/opt/homebrew/Cellar/grpc/1.47.1/lib -lgrpc  -lupb -laddress_sorting
     LIBS += -framework Security -framework Cocoa
     # For Sparkle Usage
     SOURCES += \
@@ -186,7 +204,9 @@ unix:!mac {
 }
 
 unix {
-    PKGCONFIG += zbar libqrencode libuv libsodium grpc grpc++ protobuf gpr yaml-cpp
+    #PKGCONFIG += zbar libqrencode libuv libsodium grpc grpc++ protobuf gpr yaml-cpp
+    PKGCONFIG += zbar libqrencode libuv libsodium gRPC grpc++ protobuf gpr yaml-cpp
+    #PKGCONFIG+=zbar libqrencode libuv libsodium protobuf gpr yaml-cpp
     LIBS += $$PWD/3rd/trojan-qt5-core/Trojan-Qt5-Core.a
 }
 

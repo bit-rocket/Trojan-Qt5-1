@@ -1,5 +1,6 @@
 #include "logger.h"
 
+#include <plog/Initializers/RollingFileInitializer.h>
 #include <plog/Log.h>
 
 /**
